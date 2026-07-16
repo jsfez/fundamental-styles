@@ -50,6 +50,9 @@
 @import "./common/textarea/sap_fiori";
 
 :root {
+  /* Element */
+  --sapElement_BorderCornerRadius: 1.5rem;
+
   /* BTP */
   --sapMenu_Shadow1: 0 0 0.125rem 0 rgb(0 0 0 / 16%), 0 0.5rem 1rem 0 rgb(0 0 0 / 16%);
   --sapMenu_Shadow2: 0 0 0.125rem 0 rgb(0 0 0 / 48%), 0 1rem 2rem 0 rgb(0 0 0 / 16%);
