@@ -42,3 +42,6 @@ docs/schemas/
 
 .nx/polygraph
 .nx/self-healing
+# Argos visual testing
+screenshots
+test-results

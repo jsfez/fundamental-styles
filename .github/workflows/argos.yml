@@ -1,0 +1,31 @@
+name: "Argos"
+on:
+  # Builds on `main` become the baseline every pull request is compared against.
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+  # Argos authenticates via OIDC, so no token needs to be stored as a secret.
+  id-token: write
+
+jobs:
+  visual-testing:
+    runs-on: ubuntu-latest
+    name: Visual testing
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0 # Argos needs the git history to find the baseline build
+      - name: Setup Node.js and Cache
+        uses: ./.github/actions/nodejs
+      - name: Build Styles
+        run: yarn run build
+      - name: Build Storybook
+        run: yarn run storybook:chromatic
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+      - name: Take screenshots and upload to Argos
+        run: npx playwright test -c argos/playwright.config.ts
